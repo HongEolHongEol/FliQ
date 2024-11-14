@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.hongul.filq.R
 import com.hongul.filq.ui.CardShareViewModelProvider
+import com.hongul.filq.ui.customize.BusinessCardGenerateScreen
 import com.hongul.filq.ui.home.HomeScreen
 import com.hongul.filq.ui.home.StickerChangeRoute
 import com.hongul.filq.ui.home.StickerChangeScreen
@@ -73,6 +74,10 @@ fun NavigationGraph(navController: NavHostController) {
                     factory = CardShareViewModelProvider.factory(route.cardId),
                 )
                 CardShareScreen(viewModel)
+            }
+            composable("generate") {
+                showNavigationBar = false
+                BusinessCardGenerateScreen(navController)
             }
         }
 

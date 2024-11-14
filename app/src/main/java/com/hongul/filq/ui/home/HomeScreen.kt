@@ -136,24 +136,7 @@ fun HomeScreen(
             ) { page ->
                 when(page+1) {
                     pagerState.pageCount -> EmptyBusinessCard(onClick = {
-                        viewModel.insertCard(
-                            BusinessCard(
-                                name = "홍길동",
-                                title = "나야, 홍길동",
-                                phoneNumber = "010-3213-5392",
-                                email = "gildong@gmail.com",
-                                address = "대구광역시 달서구 신당동",
-                                organization = "계명대학교",
-                                department = "컴퓨터공학부",
-                                position = "홍얼홍얼",
-                                sns = listOf(
-                                    SNS.Instagram("https://www.instagram.com/gildong")
-                                ),
-                                imagePath = "image.png",
-                                avatar = Avatar(),
-                                introduction = "안녕하세여."
-                            )
-                        )
+                        navigator.navigate("generate")
                     })
                     else -> BusinessCardView(
                         businessCard = cards[page],
