@@ -19,8 +19,13 @@ import androidx.compose.ui.text.font.FontWeight
 fun SettingsScreen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("설정") },
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = "설정",
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "뒤로 가기")

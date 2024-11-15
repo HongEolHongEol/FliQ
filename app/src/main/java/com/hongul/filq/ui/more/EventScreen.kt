@@ -17,11 +17,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun EventScreen(onBack: () -> Unit) {
-    val selectedTabIndex = remember { mutableStateOf(0) } // 기본적으로 '이벤트' 탭 선택
+    val selectedTabIndex = remember { mutableStateOf(0) }
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 title = { Text("이벤트/공지사항") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
@@ -37,64 +37,31 @@ fun EventScreen(onBack: () -> Unit) {
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            // TabRow를 위한 구조
             TabRow(
                 selectedTabIndex = selectedTabIndex.value,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                // 이벤트 탭
                 Tab(
                     selected = selectedTabIndex.value == 0,
-                    onClick = { selectedTabIndex.value = 0 }, // 이벤트 탭 클릭 시 선택된 인덱스를 0으로 설정
+                    onClick = { selectedTabIndex.value = 0 },
                     text = { Text("이벤트") },
                     selectedContentColor = Color.Black,
                     unselectedContentColor = Color.Gray
                 )
-                // 공지사항 탭
                 Tab(
                     selected = selectedTabIndex.value == 1,
-                    onClick = { selectedTabIndex.value = 1 }, // 공지사항 탭 클릭 시 선택된 인덱스를 1으로 설정
+                    onClick = { selectedTabIndex.value = 1 },
                     text = { Text("공지사항") },
                     selectedContentColor = Color.Black,
                     unselectedContentColor = Color.Gray
                 )
             }
 
-            // 선택된 탭에 해당하는 밑줄
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                // 이벤트 탭 밑줄
-                Box(
-                    modifier = Modifier
-                        .height(2.dp)
-                        .background(if (selectedTabIndex.value == 0) Color.Black else Color.Gray)
-                )
-                // 공지사항 탭 밑줄
-                Box(
-                    modifier = Modifier
-                        .height(2.dp)
-                        .background(if (selectedTabIndex.value == 1) Color.Black else Color.Gray)
-                )
-            }
-
-            // 탭에 따라 다른 내용 표시
             Spacer(modifier = Modifier.height(20.dp))
             when (selectedTabIndex.value) {
-                0 -> {
-                    Text("여기에 이벤트 내용이 들어갑니다.")
-                }
-                1 -> {
-                    Text("여기에 공지사항 내용이 들어갑니다.")
-                }
+                0 -> Text("여기에 이벤트 내용이 들어갑니다.")
+                1 -> Text("여기에 공지사항 내용이 들어갑니다.")
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewEventScreen() {
-    EventScreen(onBack = {})
 }
