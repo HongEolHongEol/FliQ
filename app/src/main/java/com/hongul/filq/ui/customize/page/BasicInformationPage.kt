@@ -1,4 +1,4 @@
-package com.hongul.filq.ui.customize
+package com.hongul.filq.ui.customize.page
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,41 +25,11 @@ import java.time.format.TextStyle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BasicInformation() {
-    val titlePadding = 121.dp
+fun BasicInformationPage(onNext: () -> Unit) {
     val progress = 0.25f
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "명함 생성",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        //textAlign = TextAlign.Center,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = titlePadding, end = titlePadding)
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { /* 뒤로 가기 클릭 로직 */ }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "뒤로 가기"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
-            )
-        }
-    ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding)
                 .fillMaxSize()
                 .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.Start
@@ -116,12 +86,12 @@ fun BasicInformation() {
                 // "0/20" 문자
                 Text(
                     text = "${name.value.length}/20",
-                    modifier = Modifier.padding(start = 360.dp, top = 0.dp),
+                    modifier = Modifier.padding(start = 320.dp, top = 0.dp),
                     style = androidx.compose.ui.text.TextStyle(fontSize = 13.sp, color = Color.Gray)
                 )
                 Text(
                     text = "*은 필수 사항입니다.",
-                    modifier = Modifier.padding(start = 280.dp, top = 0.dp),
+                    modifier = Modifier.padding(start = 240.dp, top = 0.dp),
                     style = androidx.compose.ui.text.TextStyle(fontSize = 13.sp, color = Color.Gray)
                 )
             }
@@ -249,7 +219,7 @@ fun BasicInformation() {
                 contentAlignment = Alignment.BottomCenter // 버튼을 화면 하단에 정렬
             ) {
                 Button(
-                    onClick = { /* 다음 버튼 클릭 로직 */ },
+                    onClick = onNext,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),
@@ -261,4 +231,4 @@ fun BasicInformation() {
             }
         }
     }
-}
+

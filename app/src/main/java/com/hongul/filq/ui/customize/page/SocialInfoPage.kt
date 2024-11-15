@@ -1,7 +1,6 @@
-package com.hongul.filq.ui.customize
+package com.hongul.filq.ui.customize.page
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -19,60 +18,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SocialInfoScreen() {
-    val titlePadding = 121.dp
+fun SocialInfoPage(onNext: () -> Unit) {
     val progress = 0.7f
-
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween // Distribute space between items
-                    ) {
-                        Text(
-                            text = "명함 생성",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.Black,
-                            modifier = Modifier.padding(start = titlePadding) // Left padding
-                        )
-
-                        Text(
-                            text = "건너뛰기",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF125422), // Green color
-                            modifier = Modifier
-                                .clickable { /* 건너뛰기 클릭 로직 */ }
-                                .padding(end = 16.dp) // Optional padding to the right
-                        )
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = { /* 뒤로 가기 클릭 로직 */ }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "뒤로 가기"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
-            )
-        }
-    ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding)
                 .fillMaxSize()
                 .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.Start
@@ -225,7 +179,7 @@ fun SocialInfoScreen() {
                 contentAlignment = Alignment.BottomCenter // 버튼을 화면 하단에 정렬
             ) {
                 Button(
-                    onClick = { /* 다음 버튼 클릭 로직 */ },
+                    onClick = onNext,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),
@@ -237,4 +191,3 @@ fun SocialInfoScreen() {
             }
         }
     }
-}

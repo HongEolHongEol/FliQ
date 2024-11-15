@@ -1,9 +1,11 @@
 package com.hongul.filq.ui.customize
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -27,11 +29,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.hongul.filq.R
+import com.hongul.filq.ui.customize.page.BasicInformationPage
+import com.hongul.filq.ui.customize.page.OrganizationInfoPage
+import com.hongul.filq.ui.customize.page.SocialInfoPage
 import com.hongul.filq.ui.customize.page.StartPage
 import kotlinx.coroutines.launch
 
@@ -63,17 +69,32 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                         )
                     }
                 },
-                title = { Text(title) },
+                title = {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center // 중앙 정렬
+                    ) {
+                        Text(
+                            text = title,
+                            fontWeight = FontWeight.SemiBold, // 굵게 설정
+                            fontSize = 18.sp, // 원하는 크기로 설정
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 121.dp)
+                        )
+                    }
+                },
             )
         }
-    ){ innerPadding ->
-        Column(
+    ) { innerPadding ->
+        HorizontalPager(
+            state = ps,
+            //count = 3, // 페이지 수 설정
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            when (ps.currentPage) {
+                .fillMaxSize()
+        ) { page ->
+            when (page) {
                 0 -> {
                     title = ""
                     StartPage(
@@ -88,8 +109,37 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                     )
                 }
                 1-> {
-                    title ="명함 생성"
-
+                    title = "명함 생성"
+                    BasicInformationPage(
+                        onNext = {
+                            scope.launch {
+                                Log.d("BusinessCardGenerateScreen", "ps.animateScrollToPage(1) 호출됨")
+                                ps.animateScrollToPage(2) // 다음 페이지로 이동
+                            }
+                        }
+                    )
+                }
+                2 -> {
+                    title = "명함 생성"
+                    OrganizationInfoPage(
+                        onNext = {
+                            scope.launch {
+                                Log.d("BusinessCardGenerateScreen", "OrganizationInfoPage -> 다음 페이지로 이동")
+                                ps.animateScrollToPage(3) // 다음 페이지로 이동
+                            }
+                        }
+                    )
+                }
+                3->{
+                    title = "명함 생성"
+                    SocialInfoPage(
+                        onNext = {
+                            scope.launch {
+                                Log.d("BusinessCardGenerateScreen", "SocialInfoPage -> 다음 페이지로 이동")
+                                ps.animateScrollToPage(4) // 다음 페이지로 이동
+                            }
+                        }
+                    )
                 }
             }
         }

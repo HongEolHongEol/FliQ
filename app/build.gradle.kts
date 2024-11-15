@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.navigation.runtime.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.google.accompanist.permissions)
     implementation(libs.play.services.nearby)

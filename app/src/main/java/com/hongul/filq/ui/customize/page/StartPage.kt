@@ -1,5 +1,6 @@
 package com.hongul.filq.ui.customize.page
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -49,7 +50,10 @@ fun StartPage(onCreate: () -> Unit, onUpload: () -> Unit) {
         )
 
         Button(
-            onClick = onCreate,
+            onClick = {
+                Log.d("StartPage", "Create Business Card button clicked")  // 콜백 호출 확인 로그
+                onCreate()
+            },
             modifier = Modifier
                 .size(width = 319.dp, height = 160.dp)
                 .padding(vertical = 8.dp)
