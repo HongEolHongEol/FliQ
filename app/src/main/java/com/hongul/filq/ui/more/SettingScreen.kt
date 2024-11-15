@@ -38,9 +38,6 @@ fun SettingsScreen(onBack: () -> Unit) {
             SettingsItem(text = "계정 설정", showArrow = true, onClick = { /* 계정 설정으로 이동 로직 */ })
             Divider(color = Color.Gray.copy(alpha = 0.3f), thickness = 1.dp)
 
-            SettingsItem(text = "버전 정보", onClick = { /* 버전 정보 화면으로 이동 로직 */ })
-            Divider(color = Color.Gray.copy(alpha = 0.3f), thickness = 1.dp)
-
             SettingsItem(text = "이용 약관", showArrow = true, onClick = { /* 이용 약관 화면으로 이동 로직 */ })
             Divider(color = Color.Gray.copy(alpha = 0.3f), thickness = 1.dp)
 
