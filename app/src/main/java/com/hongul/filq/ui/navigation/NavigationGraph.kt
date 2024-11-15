@@ -20,6 +20,8 @@ import androidx.navigation.toRoute
 import com.hongul.filq.R
 import com.hongul.filq.ui.CardShareViewModelProvider
 import com.hongul.filq.ui.customize.BusinessCardGenerateScreen
+import com.hongul.filq.ui.customize.page.PlusSnsPage
+import com.hongul.filq.ui.customize.page.SocialInfoPage
 import com.hongul.filq.ui.home.HomeScreen
 import com.hongul.filq.ui.home.StickerChangeRoute
 import com.hongul.filq.ui.home.StickerChangeScreen
@@ -39,7 +41,6 @@ fun NavigationGraph(navController: NavHostController) {
     Column(Modifier.fillMaxSize()) {
         var showNavigationBar by remember { mutableStateOf(false) }
 
-        // TODO: serializable 클래스로 루트 교체
         NavHost(
             navController = navController,
             startDestination = NavItem.Home.route,
@@ -68,7 +69,6 @@ fun NavigationGraph(navController: NavHostController) {
             }
             composable<CardShareRoute> {
                 showNavigationBar = false
-
                 val route = it.toRoute<CardShareRoute>()
                 val viewModel: CardShareViewModel = viewModel(
                     factory = CardShareViewModelProvider.factory(route.cardId),
@@ -79,13 +79,24 @@ fun NavigationGraph(navController: NavHostController) {
                 showNavigationBar = false
                 BusinessCardGenerateScreen(navController)
             }
+            composable("social_info") {
+                showNavigationBar = false
+                SocialInfoPage(onNext = {
+                    navController.navigate("plus_sns") // PlusSns로 이동
+                })
+            }
+            composable("plus_sns") {
+                showNavigationBar = false
+                PlusSnsPage(onBack = { navController.popBackStack() })
+            }
         }
 
-        if(showNavigationBar) {
+        if (showNavigationBar) {
             BottomNavigation(navController = navController)
         }
     }
 }
+
 
 @Composable
 private fun PlaceHolder(title: String) {
@@ -98,3 +109,4 @@ private fun PlaceHolder(title: String) {
         }
     )
 }
+

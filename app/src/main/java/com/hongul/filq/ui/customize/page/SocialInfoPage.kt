@@ -110,6 +110,7 @@ fun SocialInfoPage(onNext: () -> Unit) {
                                 .size(48.dp) // Size of the circle
                                 .clip(CircleShape) // Make the box a circle
                                 .background(Color(0xFF9CD2A1))
+                                .clickable { onNext() } // 클릭 시 onNext 호출
                         ){
                             Text(
                                 text = "+",

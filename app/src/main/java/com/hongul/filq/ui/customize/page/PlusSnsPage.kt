@@ -1,14 +1,10 @@
-package com.hongul.filq.ui.customize
+package com.hongul.filq.ui.customize.page
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -26,42 +22,11 @@ import com.hongul.filq.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlusSns() {
-    val titlePadding = 121.dp
-
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween // Distribute space between items
-                    ) {
-                        Text(
-                            text = "명함 생성",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.Black,
-                            modifier = Modifier.padding(start = titlePadding) // Left padding
-                        )
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = { /* 뒤로 가기 클릭 로직 */ }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "뒤로 가기"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
-            )
-        }
-    ) { innerPadding ->
+fun PlusSnsPage(
+    onBack: () -> Unit
+    ) {
         Column(
             modifier = Modifier
-                .padding(innerPadding)
                 .fillMaxSize()
                 .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.Start
@@ -154,4 +119,5 @@ fun PlusSns() {
 
         }
     }
-}
+
+
