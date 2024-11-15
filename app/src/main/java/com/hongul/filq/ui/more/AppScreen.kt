@@ -20,7 +20,7 @@ fun AppScreen() {
         )
         "마이페이지" -> MyPageScreen(onBack = { currentScreen.value = "더보기" })
         "이벤트" -> EventScreen(onBack = { currentScreen.value = "더보기" })
-        "1:1 문의" -> InquiryScreen(onBack = { currentScreen.value = "더보기" })
+        "1:1 문의" -> OneToOneInquiryScreen(onBack = { currentScreen.value = "더보기" })
         "설정" -> SettingsScreen(onBack = { currentScreen.value = "더보기" }) // SettingsScreen 추가
     }
 }
