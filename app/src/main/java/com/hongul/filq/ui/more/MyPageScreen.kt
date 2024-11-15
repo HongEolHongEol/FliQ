@@ -91,7 +91,6 @@ fun ProfileInfo() {
                         fontWeight = FontWeight.Bold
                     )
                 )
-                Text("@honggildong", style = MaterialTheme.typography.bodyMedium)
             }
         }
 
