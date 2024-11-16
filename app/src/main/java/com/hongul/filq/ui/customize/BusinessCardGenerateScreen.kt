@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.hongul.filq.ui.customize.page.BasicInformationPage
+import com.hongul.filq.ui.customize.page.ChangeTextColorPage
 import com.hongul.filq.ui.customize.page.OrganizationInfoPage
 import com.hongul.filq.ui.customize.page.PlusSnsPage
 import com.hongul.filq.ui.customize.page.SelectBusinessCardStylePage
@@ -67,9 +68,16 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                             text = title,
                             fontWeight = FontWeight.SemiBold, // 굵게 설정
                             fontSize = 18.sp, // 원하는 크기로 설정
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 121.dp)
+                            modifier = if (title == "글자 색 바꾸기") {
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 100.dp)
+                            }
+                                else{
+                                    Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 121.dp)
+                            }
                         )
                     }
                 },
@@ -146,6 +154,19 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                     SelectBusinessCardStylePage(
                         onNavigateToBusinessCard = { scope.launch { ps.animateScrollToPage(6) } }, // 다음 페이지로 이동
                         onNavigateToPersonalCard = { scope.launch { ps.animateScrollToPage(7) } }  // 다른 페이지로 이동
+                    )
+                }
+                6-> {
+                    title= "글자 색 바꾸기"
+                    ChangeTextColorPage(
+                        onNextClick = {
+                            scope.launch { ps.animateScrollToPage(7) } // 다음 페이지로 이동
+                        },
+                        onColorSelected = { selectedColor ->
+                            // 선택된 색상 처리 로직
+                            Log.d("ChangeTextColorPage", "선택된 색상: $selectedColor")
+                            // 필요 시 상태 업데이트 또는 저장
+                        }
                     )
                 }
             }
