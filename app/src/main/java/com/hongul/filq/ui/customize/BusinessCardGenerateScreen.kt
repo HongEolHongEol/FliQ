@@ -28,6 +28,7 @@ import com.hongul.filq.ui.customize.page.BasicInformationPage
 import com.hongul.filq.ui.customize.page.ChangeTextColorPage
 import com.hongul.filq.ui.customize.page.OrganizationInfoPage
 import com.hongul.filq.ui.customize.page.PlusSnsPage
+import com.hongul.filq.ui.customize.page.RegisterBusinessCardPage
 import com.hongul.filq.ui.customize.page.SelectBusinessCardStylePage
 import com.hongul.filq.ui.customize.page.SocialInfoPage
 import com.hongul.filq.ui.customize.page.StartPage
@@ -166,6 +167,16 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                             // 선택된 색상 처리 로직
                             Log.d("ChangeTextColorPage", "선택된 색상: $selectedColor")
                             // 필요 시 상태 업데이트 또는 저장
+                        }
+                    )
+                }
+                7-> {
+                    title ="명함 등록"
+                    RegisterBusinessCardPage(
+                        onCompleteClick = {
+                            // 완료 버튼 클릭 시의 동작 정의
+                            Log.d("RegisterBusinessCardPage", "완료 버튼이 클릭되었습니다.")
+                            scope.launch { ps.animateScrollToPage(8) } // 다음 페이지로 이동
                         }
                     )
                 }
