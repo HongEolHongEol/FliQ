@@ -27,6 +27,7 @@ import androidx.navigation.NavHostController
 import com.hongul.filq.ui.customize.page.BasicInformationPage
 import com.hongul.filq.ui.customize.page.OrganizationInfoPage
 import com.hongul.filq.ui.customize.page.PlusSnsPage
+import com.hongul.filq.ui.customize.page.SelectBusinessCardStylePage
 import com.hongul.filq.ui.customize.page.SocialInfoPage
 import com.hongul.filq.ui.customize.page.StartPage
 import com.hongul.filq.ui.customize.page.URLPage
@@ -140,7 +141,13 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                         navController = navigator // NavController 전달
                     )
                 }
-               
+                5 -> {
+                    title = "명함 생성"
+                    SelectBusinessCardStylePage(
+                        onNavigateToBusinessCard = { scope.launch { ps.animateScrollToPage(6) } }, // 다음 페이지로 이동
+                        onNavigateToPersonalCard = { scope.launch { ps.animateScrollToPage(7) } }  // 다른 페이지로 이동
+                    )
+                }
             }
         }
     }
