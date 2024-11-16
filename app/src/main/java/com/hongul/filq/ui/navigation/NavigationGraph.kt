@@ -1,5 +1,6 @@
 package com.hongul.filq.ui.navigation
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,8 +21,13 @@ import androidx.navigation.toRoute
 import com.hongul.filq.R
 import com.hongul.filq.ui.CardShareViewModelProvider
 import com.hongul.filq.ui.customize.BusinessCardGenerateScreen
+//import com.hongul.filq.ui.customize.page.FaceBookURLPage
+//import com.hongul.filq.ui.customize.page.InstaGramURLPage
 import com.hongul.filq.ui.customize.page.PlusSnsPage
 import com.hongul.filq.ui.customize.page.SocialInfoPage
+import com.hongul.filq.ui.customize.page.URLPage
+//import com.hongul.filq.ui.customize.page.XURLPage
+//import com.hongul.filq.ui.customize.page.YoutubeURLPage
 import com.hongul.filq.ui.home.HomeScreen
 import com.hongul.filq.ui.home.StickerChangeRoute
 import com.hongul.filq.ui.home.StickerChangeScreen
@@ -87,7 +93,22 @@ fun NavigationGraph(navController: NavHostController) {
             }
             composable("plus_sns") {
                 showNavigationBar = false
-                PlusSnsPage(onBack = { navController.popBackStack() })
+                PlusSnsPage(
+                    onBack = { navController.popBackStack() },
+                    navController = navController
+                )
+            }
+//
+            composable("url_page/{title}") { backStackEntry ->
+                val title = backStackEntry.arguments?.getString("title") ?: "SNS"
+                URLPage(
+                    title = title,
+                    onBack = { navController.popBackStack() },
+                    onRegisterClick = { url ->
+                        Log.d("URLPage", "$title URL 등록됨: $url")
+                        navController.popBackStack()
+                    }
+                )
             }
         }
 

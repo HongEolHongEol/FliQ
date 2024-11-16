@@ -3,6 +3,7 @@ package com.hongul.filq.ui.customize.page
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
@@ -18,12 +19,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.hongul.filq.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlusSnsPage(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    navController: NavHostController
     ) {
         Column(
             modifier = Modifier
@@ -60,6 +63,12 @@ fun PlusSnsPage(
                         R.drawable.logo_x,
                         R.drawable.logo_youtube,
                     )
+                    val routes = listOf(
+                        "facebook_url",
+                        "instagram_url",
+                        "x_url",
+                        "youtube_url"
+                    )
 
                     // snsList를 순회하여 각 SNS와 이미지를 표시
                     snsList.indices.forEach { index ->
@@ -73,6 +82,9 @@ fun PlusSnsPage(
                                     .clip(CircleShape) // 원 모양으로 클립
                                     .background(Color.White) // 배경을 흰색으로 설정
                                     .border(1.dp, Color.Gray, CircleShape) // 회색 테두리 설정
+                                    .clickable {
+                                        navController.navigate("url_page/${snsList[index]}") // SNS 이름 전달
+                                    }
                             ) {
                                 // 이미지 리소스를 불러와서 원 안에 맞게 표시
                                 Image(
