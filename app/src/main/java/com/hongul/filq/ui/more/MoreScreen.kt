@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
@@ -37,7 +36,7 @@ fun MoreScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { /* 뒤로 가기 클릭 로직 */ }) {
+                    IconButton(onClick = { /* 뒤로 가기 로직 */ }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "뒤로 가기")
                     }
                 },
@@ -51,34 +50,23 @@ fun MoreScreen(
                 .padding(horizontal = 16.dp)
                 .padding(paddingValues)
         ) {
+            // Each menu item in the More Screen
             MoreMenuItem("마이페이지", Icons.Filled.Person, onClick = onNavigateToMyPage)
-            Divider(
-                color = Color(0x1A585656),
-                thickness = 1.dp,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Divider(color = Color(0x1A585656), thickness = 1.dp, modifier = Modifier.fillMaxWidth())
+
             MoreMenuItem("이벤트/공지사항", Icons.Filled.Notifications, onClick = onNavigateToEvent)
-            Divider(
-                color = Color(0x1A585656),
-                thickness = 1.dp,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Divider(color = Color(0x1A585656), thickness = 1.dp, modifier = Modifier.fillMaxWidth())
+
             MoreMenuItem("1:1 문의", Icons.Filled.Email, onClick = onNavigateToInquiry)
-            Divider(
-                color = Color(0x1A585656),
-                thickness = 1.dp,
-                modifier = Modifier.fillMaxWidth()
-            )
-            MoreMenuItem("설정", Icons.Filled.Settings, onClick = onNavigateToSettings) // 설정 클릭 이벤트 추가
-            Divider(
-                color = Color(0x1A585656),
-                thickness = 1.dp,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Divider(color = Color(0x1A585656), thickness = 1.dp, modifier = Modifier.fillMaxWidth())
+
+            MoreMenuItem("설정", Icons.Filled.Settings, onClick = onNavigateToSettings)
+            Divider(color = Color(0x1A585656), thickness = 1.dp, modifier = Modifier.fillMaxWidth())
         }
     }
 }
 
+// Composable function to render individual menu items
 @Composable
 fun MoreMenuItem(
     text: String,
@@ -104,7 +92,8 @@ fun MoreMenuItem(
             style = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
-            )
+            ),
+            color = Color.Black
         )
     }
 }
