@@ -140,22 +140,7 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                         navController = navigator // NavController 전달
                     )
                 }
-
-                5 -> {
-                    val snsList = listOf("Facebook", "Instagram", "X", "YouTube")
-                    val snsIndex = page - 5 // 현재 SNS의 인덱스 계산
-                    val snsTitle = snsList[snsIndex]
-
-                    URLPage(
-                        title = "$snsTitle URL 입력", // 예제에서는 Facebook URL 입력 페이지
-                        onBack = { scope.launch { ps.animateScrollToPage(4) } }, // 이전 페이지로 이동
-                        onRegisterClick = { url ->
-                            // URL 등록 시 처리 로직
-                            Log.d("URLPage", "Facebook URL 등록됨: $url")
-                            scope.launch { ps.animateScrollToPage(4) } // 등록 후 SNS 추가 페이지로 복귀
-                        }
-                    )
-                }
+               
             }
         }
     }
