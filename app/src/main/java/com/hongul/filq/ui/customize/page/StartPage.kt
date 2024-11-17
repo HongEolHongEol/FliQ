@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.hongul.filq.R
 
 @Composable
-fun StartPage(onCreate: () -> Unit, onUpload: () -> Unit) {
+fun StartPage(onCreate: () -> Unit, onUpload: () -> Unit,  onGuideClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -118,8 +118,9 @@ fun StartPage(onCreate: () -> Unit, onUpload: () -> Unit) {
                 painter = painterResource(id = R.drawable.ic_caution),
                 contentDescription = null,
             )
-            Text("명함 사진 불러오기란?", textDecoration = TextDecoration.Underline,
-                modifier = Modifier.clickable { })
+            Text("명함 사진 불러오기란?",textDecoration = TextDecoration.Underline,
+                modifier = Modifier.clickable { onGuideClick() }
+            )
         }
     }
 }
