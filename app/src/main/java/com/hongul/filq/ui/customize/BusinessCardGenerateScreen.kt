@@ -1,5 +1,6 @@
 package com.hongul.filq.ui.customize
 
+import BusinessCardPreviewScreen
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -21,6 +22,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,6 +49,7 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
     val scope = rememberCoroutineScope()
 
     var title by remember { mutableStateOf("")}
+    var selectedTemplateImageRes by remember { mutableStateOf<Int?>(null) }
 
     // ps.currentPage 값에 따라 title을 업데이트
     LaunchedEffect(ps.currentPage) {
@@ -168,6 +171,7 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                 8 -> RegisterBusinessCardPage(
                     onCompleteClick = { scope.launch { ps.animateScrollToPage(9) } }
                 )
+
                 9 -> {
                     title = "명함 생성"
                     BusinessCardTemplatePage(
@@ -181,20 +185,54 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                             R.drawable.bc7
                         ),
                         onTemplateSelected = { selectedTemplate ->
-                            Log.d("BusinessCardTemplatePage", "Selected template: $selectedTemplate")
-                            // 템플릿 선택 시 동작 정의
+                            scope.launch {
+                                ps.animateScrollToPage(10) // 다음 페이지로 이동
+                                selectedTemplateImageRes = selectedTemplate // 선택된 템플릿 저장
+                            }
                         },
                         onBackClick = {
                             scope.launch {
-                                Log.d("BusinessCardTemplatePage", "Navigating back to page 8")
-                                ps.animateScrollToPage(6) //
+                                ps.animateScrollToPage(8) // 이전 페이지로 이동
                             }
                         }
                     )
                 }
-
-            }
+                10 -> {
+                    title = "명함 생성"
+                    selectedTemplateImageRes?.let { imageRes -> // 선택된 이미지 리소스가 있을 경우
+                        BusinessCardPreviewScreen(
+                            backgroundRes = imageRes, // 선택된 템플릿 이미지 리소스 전달
+                            onCompleteClick = {
+                                scope.launch {
+                                    Log.d("BusinessCardPreviewScreen", "완료 버튼 클릭됨")
+                                    ps.animateScrollToPage(0) // 완료 버튼 클릭 시 첫 페이지로 이동
+                                }
+                            },
+                            onBackClick = {
+                                scope.launch {
+                                    ps.animateScrollToPage(9) // 이전 페이지로 이동
+                                }
+                            }
+                        )
+                    } ?: Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center // 중앙에 텍스트 표시
+                    ) {
+                        // 선택된 이미지 리소스가 없을 때
+                        Text(
+                            text = "템플릿이 선택되지 않았습니다.\n다시 시도해주세요.",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Red,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
+                }
             }
         }
     }
+}
+
 
