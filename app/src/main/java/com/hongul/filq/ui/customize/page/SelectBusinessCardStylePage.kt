@@ -88,7 +88,7 @@ fun SelectBusinessCardStylePage(onNavigateToBusinessCard: () -> Unit, onNavigate
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "기업 명함으로\n 사용하기 좋아요.",
+                            text = "기업 명함으로\n사용하기 좋아요.",
                             fontSize = 14.sp,
                             color = Color.Gray
                         )
@@ -137,7 +137,7 @@ fun SelectBusinessCardStylePage(onNavigateToBusinessCard: () -> Unit, onNavigate
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "개성을 담은 나만의 명함을\n 만들어 보세요.",
+                            text = "개성을 담은 나만의 명함을\n만들어 보세요.",
                             fontSize = 14.sp,
                             color = Color.Gray
                         )

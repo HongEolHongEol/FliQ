@@ -25,8 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.hongul.filq.R
 import com.hongul.filq.ui.customize.page.BasicInformationPage
 import com.hongul.filq.ui.customize.page.BusinessCardPhotoGuidePage
+import com.hongul.filq.ui.customize.page.BusinessCardTemplatePage
 import com.hongul.filq.ui.customize.page.ChangeTextColorPage
 import com.hongul.filq.ui.customize.page.OrganizationInfoPage
 import com.hongul.filq.ui.customize.page.PlusSnsPage
@@ -166,9 +168,32 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                 8 -> RegisterBusinessCardPage(
                     onCompleteClick = { scope.launch { ps.animateScrollToPage(9) } }
                 )
-
+                9 -> {
+                    title = "명함 생성"
+                    BusinessCardTemplatePage(
+                        templates = listOf(
+                            R.drawable.bc1,
+                            R.drawable.bc2,
+                            R.drawable.bc3,
+                            R.drawable.bc4,
+                            R.drawable.bc5,
+                            R.drawable.bc6,
+                            R.drawable.bc7
+                        ),
+                        onTemplateSelected = { selectedTemplate ->
+                            Log.d("BusinessCardTemplatePage", "Selected template: $selectedTemplate")
+                            // 템플릿 선택 시 동작 정의
+                        },
+                        onBackClick = {
+                            scope.launch {
+                                Log.d("BusinessCardTemplatePage", "Navigating back to page 8")
+                                ps.animateScrollToPage(6) //
+                            }
+                        }
+                    )
                 }
 
+            }
             }
         }
     }
