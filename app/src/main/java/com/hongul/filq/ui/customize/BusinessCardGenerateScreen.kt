@@ -1,6 +1,5 @@
 package com.hongul.filq.ui.customize
 
-import BusinessCardPreviewScreen
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -30,15 +29,17 @@ import androidx.navigation.NavHostController
 import com.hongul.filq.R
 import com.hongul.filq.ui.customize.page.BasicInformationPage
 import com.hongul.filq.ui.customize.page.BusinessCardPhotoGuidePage
+import com.hongul.filq.ui.customize.page.BusinessCardPreviewPage
 import com.hongul.filq.ui.customize.page.BusinessCardTemplatePage
 import com.hongul.filq.ui.customize.page.ChangeTextColorPage
+import com.hongul.filq.ui.customize.page.LetterPositionPage
 import com.hongul.filq.ui.customize.page.OrganizationInfoPage
 import com.hongul.filq.ui.customize.page.PlusSnsPage
 import com.hongul.filq.ui.customize.page.RegisterBusinessCardPage
 import com.hongul.filq.ui.customize.page.SelectBusinessCardStylePage
+import com.hongul.filq.ui.customize.page.SelectPhotoPage
 import com.hongul.filq.ui.customize.page.SocialInfoPage
 import com.hongul.filq.ui.customize.page.StartPage
-import com.hongul.filq.ui.customize.page.URLPage
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,8 +62,9 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
             4 -> "명함 생성"
             5 -> "명함 생성"
             6 -> "명함 생성"
-            7 -> "글자 색 바꾸기"
-            8 -> "명함 등록"
+            9 -> "글자 색 바꾸기"
+            10 -> "명함 등록"
+            8 -> "글자 위치 바꾸기"
             else -> "명함 생성"
         }
     }
@@ -113,13 +115,18 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                                     .fillMaxWidth()
                                     .padding(start = 100.dp)
                             }
-                                else if(title == "명함 사진 불러오기란?"){
-                                    Modifier
-                                        .fillMaxWidth()
-                                        .padding(start = 80.dp)
+                            else if(title == "명함 사진 불러오기란?"){
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 80.dp)
                             }
-                                else{
-                                    Modifier
+                            else if(title == "글자 위치 바꾸기"){
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 100.dp)
+                            }
+                            else{
+                                Modifier
                                     .fillMaxWidth()
                                     .padding(start = 121.dp)
                             }
@@ -159,20 +166,29 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                     navController = navigator
                 )
                 6 -> SelectBusinessCardStylePage(
-                    onNavigateToBusinessCard = { scope.launch { ps.animateScrollToPage(7) } },
-                    onNavigateToPersonalCard = { scope.launch { ps.animateScrollToPage(8) } }
+                    onNavigateToBusinessCard = { scope.launch { ps.animateScrollToPage(11) } },
+                    onNavigateToPersonalCard = { scope.launch { ps.animateScrollToPage(7) } }
                 )
-                7 -> ChangeTextColorPage(
-                    onNextClick = { scope.launch { ps.animateScrollToPage(8) } },
+                7-> SelectPhotoPage(
+                    onNext = { scope.launch { ps.animateScrollToPage(8) } }
+                )
+
+                8-> LetterPositionPage(
+                    onNext = { scope.launch { ps.animateScrollToPage(9) } },
+                    onBack = { scope.launch { ps.animateScrollToPage(7) } }
+                )
+
+                9 -> ChangeTextColorPage(
+                    onNextClick = { scope.launch { ps.animateScrollToPage(10) } },
                     onColorSelected = { selectedColor ->
                         Log.d("ChangeTextColorPage", "Selected color: $selectedColor")
                     }
                 )
-                8 -> RegisterBusinessCardPage(
-                    onCompleteClick = { scope.launch { ps.animateScrollToPage(9) } }
+                10 -> RegisterBusinessCardPage(
+                    onCompleteClick = { scope.launch { ps.animateScrollToPage(0) } }
                 )
 
-                9 -> {
+                11 -> {
                     title = "명함 생성"
                     BusinessCardTemplatePage(
                         templates = listOf(
@@ -207,21 +223,21 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                         ),
                         onTemplateSelected = { selectedTemplate ->
                             scope.launch {
-                                ps.animateScrollToPage(10) // 다음 페이지로 이동
+                                ps.animateScrollToPage(12) // 다음 페이지로 이동
                                 selectedTemplateImageRes = selectedTemplate // 선택된 템플릿 저장
                             }
                         },
                         onBackClick = {
                             scope.launch {
-                                ps.animateScrollToPage(8) // 이전 페이지로 이동
+                                ps.animateScrollToPage(10) // 이전 페이지로 이동
                             }
                         }
                     )
                 }
-                10 -> {
+                12 -> {
                     title = "명함 생성"
                     selectedTemplateImageRes?.let { imageRes -> // 선택된 이미지 리소스가 있을 경우
-                        BusinessCardPreviewScreen(
+                        BusinessCardPreviewPage(
                             backgroundRes = imageRes, // 선택된 템플릿 이미지 리소스 전달
                             onCompleteClick = {
                                 scope.launch {
@@ -231,7 +247,7 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
                             },
                             onBackClick = {
                                 scope.launch {
-                                    ps.animateScrollToPage(9) // 이전 페이지로 이동
+                                    ps.animateScrollToPage(11) // 이전 페이지로 이동
                                 }
                             }
                         )
@@ -255,5 +271,3 @@ fun BusinessCardGenerateScreen(navigator: NavHostController) {
         }
     }
 }
-
-

@@ -1,4 +1,4 @@
-package com.hongul.filq.ui.customize
+package com.hongul.filq.ui.customize.page
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,7 +13,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun LetterPosition() {
+fun LetterPositionPage(
+    onNext: () -> Unit,
+    onBack: () -> Unit
+) {
     var textColor by remember { mutableStateOf(Color.Black) } // 글자 색상 관리
     val selectedBoxes = remember { mutableStateOf(listOf(false, false, false)) }
 
@@ -49,12 +52,16 @@ fun LetterPosition() {
                         }
                     }
                 )
-                 Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(5.dp))
             }
         }
 
         Button(
-            onClick = { textColor = Color.Black },
+            onClick = {
+                if (selectedBoxes.value.contains(true)) {
+                    onNext() // 선택한 체크박스가 있을 때만 다음 페이지로 이동
+                }
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF125422)),
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
@@ -78,7 +85,7 @@ fun BusinessCard(textColor: Color,
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(220.dp)
+                .height(180.dp)
                 .background(Color.White, shape = RoundedCornerShape(8.dp))
                 .padding(padding)
                 .padding(top = 40.dp)
