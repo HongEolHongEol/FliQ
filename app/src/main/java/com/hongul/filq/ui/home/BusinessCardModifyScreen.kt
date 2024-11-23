@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.hongul.filq.ui.theme.FilQTheme
 import com.hongul.filq.R
 import kotlinx.serialization.Serializable
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Serializable
 data class BusinessCardModifyRoute(
@@ -64,6 +65,7 @@ fun BusinessCardModifyScreen(onComplete: () -> Unit = {}) {
                     Button(
                         onClick = onComplete,
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF125422)),
+                        shape = RoundedCornerShape(5.dp),
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp)
