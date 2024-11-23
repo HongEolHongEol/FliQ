@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.hongul.filq.ui.theme.FilQTheme
 import com.hongul.filq.R
 import kotlinx.serialization.Serializable
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Serializable
 data class BusinessCardMetaDataRoute(
@@ -67,6 +68,7 @@ fun BusinessCardMetaDataScreen() {
                 Button(
                     onClick = { /*수정으로 이동*/ },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF125422)),
+                    shape = RoundedCornerShape(5.dp),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp)
