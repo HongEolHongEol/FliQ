@@ -33,7 +33,7 @@ fun CategorySelectionScreen(
     ) {
         Column(
             modifier = Modifier
-                .background(Color.White, shape = RoundedCornerShape(16.dp)) // 흰색 배경 박스
+                .background(Color.White, shape = RoundedCornerShape(5.dp)) // 흰색 배경 박스
                 .padding(24.dp)
                 .fillMaxWidth(0.8f), // 가로 크기 조절
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -55,7 +55,7 @@ fun CategorySelectionScreen(
                     colors = ButtonDefaults.buttonColors(
                         containerColor = if (selectedCategory == category) customGreen else customGray
                     ),
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(5.dp)
                 ) {
                     Text(
                         text = category,
@@ -73,7 +73,7 @@ fun CategorySelectionScreen(
                     onCategoryConfirmed(selectedCategory) // 선택한 카테고리 전달
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = customGreen),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("완료", color = Color.White, fontSize = 16.sp)
