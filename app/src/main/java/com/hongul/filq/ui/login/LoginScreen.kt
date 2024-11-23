@@ -3,7 +3,6 @@ package com.hongul.filq.ui.login
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -17,6 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.res.painterResource
+import com.hongul.filq.R
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +38,7 @@ fun LoginScreen(
                 navigationIcon = {
                     IconButton(onClick = onBackPress) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            painter = painterResource(id = R.drawable.arrow_back_ios),
                             contentDescription = "뒤로 가기",
                             tint = Color.Black
                         )
@@ -56,17 +58,20 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Spacer(modifier = Modifier.height(150.dp))
+            Spacer(modifier = Modifier.height(50.dp))
 
+            // 환영합니다
             Text(
-                text = "FliQ",
-                style = MaterialTheme.typography.displayLarge.copy(
-                    color = customGreen,
-                    fontWeight = FontWeight.Bold
-                ),
-                modifier = Modifier.padding(bottom = 32.dp)
+                text = "환영합니다",
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold,
+                color = customGreen,
+                modifier = Modifier.padding(bottom = 25.dp)
             )
 
+            Spacer(modifier = Modifier.height(40.dp))
+
+            // 이메일
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -74,7 +79,10 @@ fun LoginScreen(
             ) {
                 Text(
                     text = "이메일",
-                    style = MaterialTheme.typography.bodyMedium.copy(color = customGreen),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = 20.sp,
+                    color = customGreen,
                     modifier = Modifier.padding(bottom = 8.dp, start = 16.dp)
                 )
                 BasicTextField(
@@ -82,6 +90,7 @@ fun LoginScreen(
                     onValueChange = { email = it },
                     textStyle = TextStyle(
                         fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
                         color = Color.Black
                     ),
                     cursorBrush = SolidColor(customGreen),
@@ -90,12 +99,14 @@ fun LoginScreen(
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
+                                    .padding(start = 20.dp, top = 4.dp, bottom = 4.dp)
                             ) {
                                 if (email.isEmpty()) {
                                     Text(
                                         text = "이메일 입력",
-                                        style = TextStyle(color = Color.Gray.copy(alpha = 0.6f))
+                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.Normal,
+                                        color = Color.Gray.copy(alpha = 0.6f)
                                     )
                                 }
                                 innerTextField()
@@ -104,6 +115,7 @@ fun LoginScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(2.dp)
+                                    .padding(horizontal = 16.dp)
                                     .background(customGreen)
                             )
                         }
@@ -112,6 +124,7 @@ fun LoginScreen(
                 )
             }
 
+            // 비밀번호
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -119,7 +132,10 @@ fun LoginScreen(
             ) {
                 Text(
                     text = "비밀번호",
-                    style = MaterialTheme.typography.bodyMedium.copy(color = customGreen),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = 20.sp,
+                    color = customGreen,
                     modifier = Modifier.padding(bottom = 8.dp, start = 16.dp)
                 )
                 BasicTextField(
@@ -127,6 +143,7 @@ fun LoginScreen(
                     onValueChange = { password = it },
                     textStyle = TextStyle(
                         fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
                         color = Color.Black
                     ),
                     cursorBrush = SolidColor(customGreen),
@@ -135,12 +152,14 @@ fun LoginScreen(
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
+                                    .padding(start = 20.dp, top = 4.dp, bottom = 4.dp)
                             ) {
                                 if (password.isEmpty()) {
                                     Text(
                                         text = "비밀번호 입력",
-                                        style = TextStyle(color = Color.Gray.copy(alpha = 0.6f))
+                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.Normal,
+                                        color = Color.Gray.copy(alpha = 0.6f)
                                     )
                                 }
                                 innerTextField()
@@ -149,6 +168,7 @@ fun LoginScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(2.dp)
+                                    .padding(horizontal = 16.dp)
                                     .background(customGreen)
                             )
                         }
@@ -157,6 +177,7 @@ fun LoginScreen(
                 )
             }
 
+            // 비밀번호를 잊으셨나요
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -166,34 +187,42 @@ fun LoginScreen(
             ) {
                 Text(
                     text = "비밀번호를 잊으셨나요?",
-                    style = MaterialTheme.typography.bodySmall.copy(color = Color.Black)
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = 20.sp,
+                    color = Color.Black
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 TextButton(onClick = onPasswordResetClick, contentPadding = PaddingValues(0.dp)) {
                     Text(
                         text = "비밀번호 재설정",
-                        style = MaterialTheme.typography.bodySmall.copy(
-                            color = customGreen,
-                            textDecoration = TextDecoration.Underline
-                        )
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Normal,
+                        lineHeight = 20.sp,
+                        color = customGreen,
+                        textDecoration = TextDecoration.Underline
                     )
                 }
             }
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Login Button
+            // 로그인 버튼
             Button(
                 onClick = onLoginClick,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(horizontal = 10.dp)
                     .height(48.dp),
+                shape = RoundedCornerShape(5.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = customGreen)
             ) {
                 Text(
                     text = "로그인",
-                    color = Color.White,
-                    style = MaterialTheme.typography.bodyLarge
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = 24.sp,
+                    color = Color.White
                 )
             }
         }
