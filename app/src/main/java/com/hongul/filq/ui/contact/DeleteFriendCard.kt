@@ -24,12 +24,13 @@ fun DeleteFriendCard(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.5f)), // 흐릿한 배경
+            .background(Color.Black.copy(alpha = 0.5f)),
         contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier
-                .background(Color.White, shape = RoundedCornerShape(16.dp))
+                .padding(horizontal = 16.dp)
+                .background(Color.White, shape = RoundedCornerShape(5.dp))
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -47,7 +48,7 @@ fun DeleteFriendCard(
                 Button(
                     onClick = onCancel,
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD3D3D3)), // 회색
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(5.dp),
                     modifier = Modifier.weight(1f)
                 ) {
                     Text("취소", color = Color.Black)
@@ -56,7 +57,7 @@ fun DeleteFriendCard(
                 Button(
                     onClick = onConfirm,
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF125422)), // 초록색
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(5.dp),
                     modifier = Modifier.weight(1f)
                 ) {
                     Text("삭제", color = Color.White)
