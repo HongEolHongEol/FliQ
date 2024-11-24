@@ -2,6 +2,8 @@ package com.hongul.filq.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.*
@@ -10,85 +12,136 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.shape.RoundedCornerShape
 import com.hongul.filq.ui.theme.FilQTheme
 import com.hongul.filq.R
-import kotlinx.serialization.Serializable
-import androidx.compose.foundation.shape.RoundedCornerShape
-
-@Serializable
-data class BusinessCardMetaDataRoute(
-    val cardId: Int
-)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BusinessCardMetaDataScreen() {
+    val titleColor = Color(0xFF125422)
 
-    // 세로방향
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = {Text("명함 편집", fontSize = 20.sp) },
-                navigationIcon = { IconButton(onClick = {}){
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft,null)
+                title = { Text("명함 편집", fontSize = 20.sp) },
+                navigationIcon = { IconButton(onClick = {}) {
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, null)
                 } }
             )
         }
-    ){ innerPadding->
-        Box(modifier=Modifier.padding(innerPadding)){
-            Column(
+    ) { innerPadding ->
+        // 스크롤
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp)
+        ) {
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Text(
+                text = "이름 또는 닉네임",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = titleColor,
+                modifier = Modifier.padding()
+                    .padding(start = 8.dp, bottom = 4.dp) // 오른쪽으로 이동
+            )
+            BusinessCardItem(icon = R.drawable.ic_user, text = "홍알홍알")
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = "명함 제목",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = titleColor,
+                modifier = Modifier.padding()
+                    .padding(start = 8.dp, bottom = 4.dp) // 오른쪽으로 이동
+            )
+            BusinessCardItem(icon = R.drawable.ic_group, text = "캡스톤(1)")
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = "휴대폰 번호",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = titleColor,
+                modifier = Modifier.padding()
+                    .padding(start = 8.dp, bottom = 4.dp) // 오른쪽으로 이동
+            )
+            BusinessCardItem(icon = R.drawable.ic_call, text = "01057540000")
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = "기업 또는 단체명",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = titleColor,
+                modifier = Modifier.padding()
+                    .padding(start = 8.dp, bottom = 4.dp) // 오른쪽으로 이동
+            )
+            BusinessCardItem(icon = R.drawable.ic_groupname, text = "홍얼홍얼")
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = "부서/직책",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = titleColor,
+                modifier = Modifier.padding()
+                    .padding(start = 8.dp, bottom = 4.dp) // 오른쪽으로 이동
+            )
+            BusinessCardItem(icon = R.drawable.ic_role, text = "백엔드개발자")
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = "이메일",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = titleColor,
+                modifier = Modifier.padding()
+                    .padding(start = 8.dp, bottom = 4.dp) // 오른쪽으로 이동
+            )
+            BusinessCardItem(icon = R.drawable.ic_email, text = "xxx@stu.kmu.ac.kr")
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = "SNS",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = titleColor,
+                modifier = Modifier.padding()
+                    .padding(start = 8.dp, bottom = 4.dp) // 오른쪽으로 이동
+            )
+            BusinessCardItem(icon = R.drawable.ic_insta, text = "@hongeol.hongeol")
+            BusinessCardItem(icon = R.drawable.ic_kakao, text = "hongeol")
+            BusinessCardItem(icon = R.drawable.ic_facebook, text = "honghonghong")
+            BusinessCardItem(icon = R.drawable.ic_twitter, text = "@hongeol")
+            BusinessCardItem(icon = R.drawable.ic_blog, text = "hongeoul")
+
+            // "수정하기" 버튼도 스크롤 내용의 맨 아래에 포함
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = { /*수정으로 이동*/ },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF125422)),
+                shape = RoundedCornerShape(5.dp),
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-
-                ) {
-
-                // 더 간격 띄우기
-                Spacer(modifier = Modifier.height(23.dp))
-
-                // 각 항목(편집 ㄱㄴ하게해야함 수정 누르면)
-                BusinessCardItem(icon = R.drawable.ic_person, text = "홍알홍알")
-                BusinessCardItem(icon = R.drawable.ic_group, text = "캡스톤(1)")
-                BusinessCardItem(icon = R.drawable.ic_star, text = "홍얼홍얼")
-                BusinessCardItem(icon = R.drawable.ic_mic, text = "010 0000 0000")
-                BusinessCardItem(icon = R.drawable.ic_pencil, text = "비지니스명함")
-                BusinessCardItem(icon = R.drawable.ic_pencil, text = "xxx@stu.kmu.ac.kr")
-                BusinessCardItem(icon = R.drawable.ic_link, text = "@hongeol.hongeol")
-                BusinessCardItem(icon = R.drawable.ic_link, text = "hong")
-                BusinessCardItem(icon = R.drawable.ic_link, text = "//fliq")
-                BusinessCardItem(icon = R.drawable.ic_link, text = "http://digital.profile")
-                BusinessCardItem(icon = R.drawable.ic_link, text = "eofk-dfdr")
-
-                Spacer(modifier = Modifier.weight(1f)) // 빈 공간 남아있는 공간 전부
-
-                // 수정하기
-                Button(
-                    onClick = { /*수정으로 이동*/ },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF125422)),
-                    shape = RoundedCornerShape(5.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp)
-                ) {
-                    Text(
-                        text = "수정하기",
-                        fontSize = 18.sp,
-                        color = Color.White
-                    )
-                }
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text(
+                    text = "수정하기",
+                    fontSize = 18.sp,
+                    color = Color.White
+                )
             }
         }
-
     }
 }
 
 @Composable
 fun BusinessCardItem(icon: Int, text: String) {
     Row(
-        //수직 정렬
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
@@ -99,7 +152,6 @@ fun BusinessCardItem(icon: Int, text: String) {
             contentDescription = null,
             modifier = Modifier.size(27.dp)
         )
-        //아이콘이랑 텍스트 거리
         Spacer(modifier = Modifier.width(15.dp))
         Text(
             text = text,
@@ -108,7 +160,6 @@ fun BusinessCardItem(icon: Int, text: String) {
     }
 }
 
-//미리보기 코드
 @Preview(showBackground = true)
 @Composable
 fun ModifyBusinessCardScreenPreview() {
@@ -116,3 +167,4 @@ fun ModifyBusinessCardScreenPreview() {
         BusinessCardMetaDataScreen()
     }
 }
+
