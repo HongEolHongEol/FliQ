@@ -3,29 +3,11 @@ package com.hongul.fliq.ui.ddu111
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hongul.fliq.R
@@ -43,7 +26,7 @@ import com.hongul.fliq.R
 fun AddFriendScreenChatBot(
     name: String,
     tags: String,
-    onBackPress: () -> Unit = {} // 뒤로 가기 버튼 클릭 이벤트
+    onBackPress: () -> Unit = {}
 ) {
     val titleColor = Color(0xFF125422)
     val contentColor = Color.Black
@@ -55,14 +38,14 @@ fun AddFriendScreenChatBot(
                 navigationIcon = {
                     IconButton(onClick = onBackPress) {
                         Icon(
-                            painter = painterResource(id = R.drawable.su_arrow_back_ios), // 뒤로 가기 아이콘
+                            painter = painterResource(id = R.drawable.su_arrow_back_ios),
                             contentDescription = "뒤로 가기",
                             tint = Color.Black
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background // 배경색 설정
+                    containerColor = MaterialTheme.colorScheme.background
                 )
             )
         },
@@ -78,7 +61,6 @@ fun AddFriendScreenChatBot(
                     modifier = Modifier.weight(1f),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // 명함 사진
                     Image(
                         painter = painterResource(id = R.drawable.su_ic_hongchuping),
                         contentDescription = "Profile Image",
@@ -88,15 +70,11 @@ fun AddFriendScreenChatBot(
                             .padding(bottom = 16.dp)
                     )
 
-                    // 그림자 있는 흰 박스
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp)) // 그림자 추가
-                            .background(
-                                color = Color.White,
-                                shape = RoundedCornerShape(16.dp)
-                            ) // 흰 배경 추가
+                            .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
+                            .background(color = Color.White, shape = RoundedCornerShape(16.dp))
                             .padding(16.dp)
                     ) {
                         Column(
@@ -104,9 +82,8 @@ fun AddFriendScreenChatBot(
                                 .fillMaxWidth()
                                 .verticalScroll(rememberScrollState())
                         ) {
-                            // Name
                             Text(
-                                text = "$name",
+                                text = name,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 24.sp,
                                 color = contentColor,
@@ -115,28 +92,25 @@ fun AddFriendScreenChatBot(
                                     .fillMaxWidth()
                                     .padding(bottom = 16.dp)
                             )
-                            // 추가하기 버튼
+
                             Column(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Icon(
-                                    painter = painterResource(id = R.drawable.su_ic_chatbot), // 새로 추가한 PNG 파일 이름
+                                    painter = painterResource(id = R.drawable.su_ic_chatbot),
                                     contentDescription = "챗봇 아이콘",
-                                    tint = Color(0xFF125422), // 아이콘 색상
+                                    tint = Color(0xFF125422),
                                     modifier = Modifier
-                                        .size(25.dp) // 아이콘 크기 설정
-                                        .clickable { /* 챗봇 버튼 클릭 로직 */ } // 클릭 이벤트 처리
+                                        .size(25.dp)
+                                        .clickable { }
                                 )
-
                                 Spacer(modifier = Modifier.height(4.dp))
-
-                                // 텍스트
                                 Text(
                                     text = "챗봇",
-                                    fontSize = 13.sp, // 텍스트 크기 확대
+                                    fontSize = 13.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color(0xFF125422) // 텍스트 색상
+                                    color = Color(0xFF125422)
                                 )
                             }
 
@@ -146,7 +120,6 @@ fun AddFriendScreenChatBot(
                                 modifier = Modifier.padding(vertical = 8.dp)
                             )
 
-                            // SNS
                             Text(
                                 text = "SNS",
                                 fontWeight = FontWeight.Bold,
@@ -154,10 +127,7 @@ fun AddFriendScreenChatBot(
                                 color = titleColor,
                                 modifier = Modifier.padding(bottom = 8.dp)
                             )
-                            Column(
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                // Instagram
+                            Column {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier.padding(bottom = 8.dp)
@@ -174,7 +144,7 @@ fun AddFriendScreenChatBot(
                                         color = contentColor
                                     )
                                 }
-                                // Kakao
+
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
@@ -191,9 +161,9 @@ fun AddFriendScreenChatBot(
                                     )
                                 }
                             }
+
                             Spacer(modifier = Modifier.height(8.dp))
 
-                            // 태그
                             Text(
                                 text = "태그",
                                 fontWeight = FontWeight.Bold,
@@ -208,7 +178,6 @@ fun AddFriendScreenChatBot(
                                 modifier = Modifier.padding(bottom = 16.dp)
                             )
 
-                            // QR 코드
                             Text(
                                 text = "QR 코드",
                                 fontWeight = FontWeight.Bold,
@@ -226,5 +195,14 @@ fun AddFriendScreenChatBot(
                 }
             }
         }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AddFriendScreenChatBotPreview() {
+    AddFriendScreenChatBot(
+        name = "홍츄핑",
+        tags = "#자바 #프론트 #AI"
     )
 }

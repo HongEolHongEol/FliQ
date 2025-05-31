@@ -23,10 +23,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hongul.fliq.R
-import com.hongul.filq.ui.contact.ContactCard
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
+
+// Contact 데이터 클래스 정의
+data class Contact(
+    val name: String,
+    val phone: String,
+    val email: String,
+    val statusMessage: String
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,14 +53,14 @@ fun TagScreen(onAddFriendScreen: (String, String) -> Unit) {
             var searchQuery by remember { mutableStateOf("") }
             val recommendedTags = listOf("#프론트", "#C++", "#파이썬", "#코틀린", "#자바")
             val allContacts = listOf(
-                ContactCard(name = "홍츄핑", phone = "", email = "", statusMessage = "#자바녀 #홍홍"),
-                ContactCard(name = "홍박사", phone = "", email = "", statusMessage = "#자바 #홍"),
-                ContactCard(name = "홍추핑구", phone = "", email = "", statusMessage = "#자바 #홍"),
-                ContactCard(name = "홍길동", phone = "", email = "", statusMessage = "#자바 #C"),
-                ContactCard(name = "김갑순", phone = "", email = "", statusMessage = "#자바 #파이썬"),
-                ContactCard(name = "백수연", phone = "", email = "", statusMessage = "#자바 #C++"),
-                ContactCard(name = "윤주원", phone = "", email = "", statusMessage = "#자바녀 #프론트"),
-                ContactCard(name = "홍어루", phone = "", email = "", statusMessage = "#자바 #C")
+                Contact("홍츄핑", "", "", "#자바 #홍홍"),
+                Contact("홍박사", "", "", "#자바 #홍"),
+                Contact("홍추핑구", "", "", "#자바 #홍"),
+                Contact("홍길동", "", "", "#자바 #C"),
+                Contact("김갑순", "", "", "#자바 #파이썬"),
+                Contact("백수연", "", "", "#자바 #C++"),
+                Contact("윤주원", "", "", "#자바 #프론트"),
+                Contact("홍구", "", "", "#자바 #C")
             )
             var filteredContacts by remember { mutableStateOf(allContacts) }
 
@@ -77,28 +81,20 @@ fun TagScreen(onAddFriendScreen: (String, String) -> Unit) {
                             }
                         },
                         placeholder = {
-                            Text(
-                                text = "태그 검색",
-                                fontSize = 13.sp,
-                                color = Color.Gray
-                            )
+                            Text("태그 검색", fontSize = 13.sp, color = Color.Gray)
                         },
                         modifier = Modifier
                             .weight(1f)
-                            .height(56.dp)
-                            .background(Color.Transparent),
-                        colors = TextFieldDefaults.textFieldColors(  // 이 부분을 제거하고 다른 방식으로 처리
+                            .height(56.dp),
+                        colors = TextFieldDefaults.colors(
                             focusedIndicatorColor = Color(0xFF125422),
                             unfocusedIndicatorColor = Color(0xFF125422),
-                            disabledIndicatorColor = Color.Transparent,
-                            containerColor = Color.Transparent
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent
                         ),
-                        textStyle = LocalTextStyle.current.copy(
-                            fontSize = 13.sp,
-                            color = Color.Black
-                        ),
-                        shape = RoundedCornerShape(0.dp)
+                        textStyle = LocalTextStyle.current.copy(fontSize = 13.sp)
                     )
+
 
                     Spacer(modifier = Modifier.width(8.dp))
 
@@ -109,9 +105,7 @@ fun TagScreen(onAddFriendScreen: (String, String) -> Unit) {
                             }
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF125422)),
-                        modifier = Modifier
-                            .height(40.dp)
-                            .padding(horizontal = 8.dp),
+                        modifier = Modifier.height(40.dp),
                         shape = RoundedCornerShape(8.dp)
                     ) {
                         Text("검색", color = Color.White, fontSize = 13.sp)
@@ -141,11 +135,7 @@ fun TagScreen(onAddFriendScreen: (String, String) -> Unit) {
                                 .padding(horizontal = 12.dp, vertical = 8.dp),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(
-                                text = tag,
-                                color = Color.Black,
-                                fontSize = 14.sp
-                            )
+                            Text(tag, fontSize = 14.sp)
                         }
                         Spacer(modifier = Modifier.width(8.dp))
                     }
@@ -153,7 +143,7 @@ fun TagScreen(onAddFriendScreen: (String, String) -> Unit) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // 검색 결과 명함 리스트
+                // 명함 리스트
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -166,7 +156,6 @@ fun TagScreen(onAddFriendScreen: (String, String) -> Unit) {
                                 .fillMaxWidth()
                                 .padding(vertical = 8.dp)
                                 .clickable {
-                                    // 명함 클릭 시 이름과 상태 메시지를 전달
                                     onAddFriendScreen(contact.name, contact.statusMessage)
                                 },
                             shape = RoundedCornerShape(16.dp),
@@ -185,11 +174,10 @@ fun TagScreen(onAddFriendScreen: (String, String) -> Unit) {
                                         .background(Color(0xFF7FBE85), shape = CircleShape)
                                 ) {
                                     Image(
-                                        painter = painterResource(id = R.drawable.stickers1),
+                                        painter = painterResource(id = R.drawable.su_stickers1),
                                         contentDescription = null,
                                         modifier = Modifier
-                                            .size(55.dp)
-                                            .offset(x = 2.dp, y = 2.dp),
+                                            .size(55.dp),
                                         contentScale = ContentScale.Fit
                                     )
                                 }
@@ -223,10 +211,10 @@ fun TagScreen(onAddFriendScreen: (String, String) -> Unit) {
     }
 }
 
-@Preview(showBackground = true, name = "TagScreen Preview")
+@Preview(showBackground = true)
 @Composable
 fun TagScreenPreview() {
-    TagScreen(onAddFriendScreen = { name, tags ->
-        Log.d("TagScreenPreview", "Selected Name: $name, Tags: $tags")
-    })
+    TagScreen { name, tags ->
+        Log.d("TagScreenPreview", "Selected: $name, $tags")
+    }
 }
