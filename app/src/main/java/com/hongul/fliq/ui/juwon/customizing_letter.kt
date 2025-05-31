@@ -43,7 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hongul.fliq.R
-import com.hongul.fliq.ui.theme.BusinessCardTheme
+//import com.hongul.fliq.ui.theme.BusinessCardTheme
 import androidx.compose.material3.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
